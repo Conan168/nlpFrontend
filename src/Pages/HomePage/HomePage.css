@@ -1,0 +1,23 @@
+.homePage {
+    /*background-color: red;*/
+    height: 100vh;
+    display: flex;
+    padding: 2%;
+}
+
+.map {
+    flex: 6;
+    padding: 50px;
+    margin: 2%;
+    border-style: solid;
+    border-radius: 5%;
+
+}
+
+.start {
+    flex: 4;
+    padding: 50px;
+    margin: 2%;
+    /*border-style: solid;
+    border-radius: 5%;*/
+}
