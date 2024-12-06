@@ -7,10 +7,14 @@ import { PlusOutlined } from '@ant-design/icons';
 import './Dispatch.css'
 import { Mission } from '../../api/ajax'
 import { getHistoryMe } from '../../api/api'
+import { Message } from 'yup';
 
 const { Title } = Typography;
 
-type Props = {}
+interface Props {
+    sender: 'user' | 'bot';
+    text: string;
+}
 
 const Dispatch: React.FC<Props> = (props: Props): JSX.Element => {
     const [mission, setMission] = useState<Mission[]>([]);
@@ -19,6 +23,21 @@ const Dispatch: React.FC<Props> = (props: Props): JSX.Element => {
     const handleUpdateMission = (updateMission: Mission[]) => {
         setMission(updateMission)
     }
+
+    const [messages, setMessages] = useState<Props[]>([
+        { sender: 'bot', text: 'Hello! How can I help you today?' },
+    ]);
+    const [path, setPath] = useState<Props | null>(null)
+
+    const updateMessage = (newMessage: Props) => {
+        setMessages((prev) => [...prev, newMessage])
+        if (newMessage.sender === 'bot') {
+            // const botReply = JSON.parse(newMessage.text)
+            setPath(newMessage)
+        }
+        console.log('reply', path?.text)
+    }
+
 
     useEffect(() => {
         const getHistoryMeInit = async () => {
@@ -56,14 +75,15 @@ const Dispatch: React.FC<Props> = (props: Props): JSX.Element => {
                 <div className='rightTop'>
                     <Title level={4}>Chatbot</Title>
                     <Divider style={{ borderColor: '#1677ff', borderWidth: '3px' }} />
-                    <Chatbot sender='bot' text='123' />
+                    <Chatbot messages={messages} onNewMessage={updateMessage} />
+                    {/* <Chatbot sender='bot' text='123' /> */}
                 </div>
                 <div className='rightBottom'>
                     <Title level={4}>Dispatch</Title>
                     <Divider style={{ borderColor: '#1677ff', borderWidth: '3px' }} />
                     <div className='createPath'>
                         <div className='path'>
-                            <Path />
+                            <Path path={path} onNewPath={updateMessage} />
                         </div>
                         <Button type="primary" variant='filled' shape='round' style={{ width: '100px', height: '100px' }} icon={<PlusOutlined style={{ color: 'ff7a45', fontSize: '80px' }} />} />
                     </div>

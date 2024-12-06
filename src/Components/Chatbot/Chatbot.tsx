@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input, Button, List, Avatar } from 'antd';
 import { UserOutlined, RobotOutlined } from '@ant-design/icons';
 import './Chatbot.css'
@@ -8,11 +8,12 @@ interface Message {
     text: string;
 }
 
-const Chatbot = (props: Message) => {
+interface Props {
+    messages: Message[];
+    onNewMessage: (message: Message) => void;
+}
 
-    const [messages, setMessages] = useState<Message[]>([
-        { sender: 'bot', text: 'Hello! How can I help you today?' },
-    ]);
+const Chatbot: React.FC<Props> = ({ messages, onNewMessage }): JSX.Element => {
 
     const [input, setInput] = useState<string>('');
 
@@ -21,12 +22,12 @@ const Chatbot = (props: Message) => {
         if (input.trim() === '') return;
 
         const newMessage: Message = { sender: 'user', text: input };
-        setMessages([...messages, newMessage]);
+        onNewMessage(newMessage);
         setInput('');
 
         setTimeout(() => {
-            const botReply: Message = { sender: 'bot', text: `You said: "${input}"` };
-            setMessages((prevMessages) => [...prevMessages, botReply]);
+            const botReply: Message = { sender: 'bot', text: `"${input}"` };
+            onNewMessage(botReply);
         }, 1000);
     };
 
@@ -35,8 +36,8 @@ const Chatbot = (props: Message) => {
             <div className='chat'>
                 <List
                     dataSource={messages}
-                    renderItem={(message) => (
-                        <List.Item>
+                    renderItem={(message, index) => (
+                        <List.Item key={index}>
                             <List.Item.Meta
                                 avatar={
                                     message.sender === 'bot' ? (
