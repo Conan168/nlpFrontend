@@ -13,18 +13,27 @@ interface Props {
 
 
 const Path: React.FC<Props> = ({ path, onNewPath }: Props): JSX.Element => {
-    let data: string[] = []
-    // console.log("path:", path?.text)
-    // console.log("path1:", path?.text.replace(/\[|\]/g, ''))
-    // console.log("path2:", path?.text.replace(/\[|\]/g, '').split(","))
-    try {
-        data = (path?.text.replace(/\[|\]/g, '').split(",").map(item => item.trim()) ?? [])
-        // console.log("info:", data)
-    } catch (error) {
-        console.error("wrong path")
-        // console.log("error:", data)
+    // let data: string[] = []
+    console.log("path:", path?.text)
+    const pathArray = (input: string): string[] => {
+        let fixedInput = input
+
+        if (input.startsWith('"') && input.endsWith('"')) {
+            fixedInput = input.slice(1, -1)
+        }
+
+        try {
+            if (!fixedInput.startsWith('[')) {
+                throw new Error("No path")
+            }
+            return JSON.parse(fixedInput)
+        } catch (error) {
+            console.error("Invailid input:", error)
+            return []
+        }
     }
 
+    const data = pathArray(path?.text ?? "[]")
 
     return (
         <Timeline>
