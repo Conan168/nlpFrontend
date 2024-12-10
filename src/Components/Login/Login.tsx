@@ -8,7 +8,7 @@ interface Props { }
 
 const { Title } = Typography;
 
-const Login: React.FC<Props> = (props: Props): JSX.Element => {
+const Login: React.FC<Props> = (_props: Props): JSX.Element => {
     return (
         <Flex vertical gap='small' justify='center' align='center'>
             <div>

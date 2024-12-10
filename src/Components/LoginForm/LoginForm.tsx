@@ -1,6 +1,6 @@
 import React from 'react';
-import { LockOutlined, UserOutlined, LoginOutlined, HomeOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, Flex } from 'antd';
+import { LoginOutlined, HomeOutlined } from '@ant-design/icons';
+import { Button, Form, Input } from 'antd';
 import { Link } from 'react-router-dom'
 import * as Yup from "yup"
 import { useAuth } from '../../Context/useAuth';
@@ -19,7 +19,7 @@ const validation = Yup.object().shape({
     password: Yup.string().required("Password is required"),
 })
 
-const LoginForm: React.FC<Props> = (props: Props): JSX.Element => {
+const LoginForm: React.FC<Props> = (_props: Props): JSX.Element => {
     /*
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);

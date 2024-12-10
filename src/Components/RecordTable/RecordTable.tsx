@@ -1,5 +1,5 @@
 import React from 'react'
-import { dataSource, columns } from "./recordData"
+import { columns } from "./recordData"
 import { Table } from 'antd';
 import { Mission } from '../../api/ajax';
 

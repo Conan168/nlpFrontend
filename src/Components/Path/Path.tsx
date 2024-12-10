@@ -12,7 +12,7 @@ interface Props {
 }
 
 
-const Path: React.FC<Props> = ({ path, onNewPath }: Props): JSX.Element => {
+const Path: React.FC<Props> = ({ path }: Props): JSX.Element => {
     // let data: string[] = []
     console.log("path:", path?.text)
     const pathArray = (input: string): string[] => {

@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
                     </ProtectedRoute>
                 ),
                 children: [
-                    { path: "dispatch", element: <Dispatch /> },
+                    { path: "dispatch", element: <Dispatch sender="user" text="Hello" /> },
                     { path: "history", element: <History /> },
                 ],
             },

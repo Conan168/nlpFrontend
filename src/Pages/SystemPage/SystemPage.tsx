@@ -13,7 +13,7 @@ interface Props { }
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const SystemPage = (props: Props) => {
+const SystemPage = (_props: Props) => {
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
@@ -30,7 +30,7 @@ const SystemPage = (props: Props) => {
     );
 
     const [userInformation, setUserInformation] = useState<UserProfile | null>(null);
-    const [serverError, setServerError] = useState<string>("")
+    const [_serverError, setServerError] = useState<string>("")
 
     const handleUserChange = async () => {
         // if (userInformation === null) {

@@ -14,7 +14,7 @@ interface Props {
 const { useToken } = theme;
 const { Text } = Typography;
 
-const UserInfo: React.FC<Props> = ({ userInfo, onChange }: Props) => {
+const UserInfo: React.FC<Props> = ({ userInfo }: Props) => {
     const { token } = useToken();
 
     const contentStyle: React.CSSProperties = {

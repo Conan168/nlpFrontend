@@ -66,9 +66,9 @@ export const UserProvider = ({ children }: Props) => {
             if (res) {
                 localStorage.setItem("access_token", res?.data.access_token);
                 const userObj = {
-                    username: res?.data.username,
+                    Name: res?.data.username,
                     Auth: res?.data.Auth,
-
+                    Uid: "026",
                     //email: res?.data.email,
                 };
                 localStorage.setItem("user", JSON.stringify(userObj));

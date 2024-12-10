@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Input, Button, List, Avatar } from 'antd';
 import { UserOutlined, RobotOutlined } from '@ant-design/icons';
 import './Chatbot.css'

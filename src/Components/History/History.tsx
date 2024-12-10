@@ -13,10 +13,10 @@ interface Props { }
 
 const { Title } = Typography
 
-const History: React.FC<Props> = (props: Props): JSX.Element => {
+const History: React.FC<Props> = (_props: Props): JSX.Element => {
     const [date, setDate] = useState<[Dayjs | null, Dayjs | null] | null>(null)
     const [searchResult, setSearchResult] = useState<Mission[]>([]);
-    const [serverError, setServerError] = useState<string>("")
+    const [_serverError, setServerError] = useState<string>("")
     const [hideBox, setHideBox] = useState<boolean>(false)
 
     const handleDateChange = (dates: [Dayjs | null, Dayjs | null] | null, dateStrings: [string, string]) => {
@@ -31,7 +31,7 @@ const History: React.FC<Props> = (props: Props): JSX.Element => {
     //     console.log(`checked = ${e.target.checked}`);
     // };
 
-    const handleClick = async (e: SyntheticEvent) => {
+    const handleClick = async (_e: SyntheticEvent) => {
         if (!date || !date[0] || !date[1]) {
             setServerError('Please select a date range')
             return

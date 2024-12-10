@@ -16,9 +16,9 @@ interface Props {
     text: string;
 }
 
-const Dispatch: React.FC<Props> = (props: Props): JSX.Element => {
+const Dispatch: React.FC<Props> = (_props: Props): JSX.Element => {
     const [mission, setMission] = useState<Mission[]>([]);
-    const [serverError, setServerError] = useState<string>("")
+    const [_serverError, setServerError] = useState<string>("")
 
     const handleUpdateMission = (updateMission: Mission[]) => {
         setMission(updateMission)

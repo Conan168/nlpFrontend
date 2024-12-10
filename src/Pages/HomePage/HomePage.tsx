@@ -10,9 +10,9 @@ interface Props { }
 
 const { Title } = Typography;
 
-const HomePage: React.FC<Props> = (props: Props): JSX.Element => {
+const HomePage: React.FC<Props> = (_props: Props): JSX.Element => {
     const [mission, setMission] = useState<Mission[]>([]);
-    const [serverError, setServerError] = useState<string>("")
+    const [_serverError, setServerError] = useState<string>("")
 
     useEffect(() => {
         const getHistoryMeInit = async () => {
