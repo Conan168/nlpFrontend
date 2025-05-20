@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Button, List, Avatar } from 'antd';
 import { UserOutlined, RobotOutlined } from '@ant-design/icons';
+import { getPath } from '../../api/api';
 import './Chatbot.css'
 
 interface Message {
@@ -16,19 +17,38 @@ interface Props {
 const Chatbot: React.FC<Props> = ({ messages, onNewMessage }): JSX.Element => {
 
     const [input, setInput] = useState<string>('');
+    const [_serverError, setServerError] = useState<string>('')
 
     // 發送訊息
-    const sendMessage = (): void => {
+    const sendMessage = async (): Promise<void> => {
         if (input.trim() === '') return;
 
         const newMessage: Message = { sender: 'user', text: input };
         onNewMessage(newMessage);
         setInput('');
-
-        setTimeout(() => {
-            const botReply: Message = { sender: 'bot', text: `"${input}"` };
-            onNewMessage(botReply);
-        }, 1000);
+        // var inputString = `{\"prompt\":\"${input}\"}`
+        // var inputJson = JSON.parse(inputString)
+        // console.log(inputString)
+        // console.log(inputJson)
+        try {
+            const result = await getPath(input)
+            console.log(result)
+            if (typeof result === "string") {
+                // const index = result.indexOf("{")
+                // const resultMessage = result.slice(0, index)
+                const botReply: Message = { sender: 'bot', text: `"${result}"` }
+                onNewMessage(botReply)
+                setServerError('')
+            } else {
+                setServerError(result);
+            }
+        } catch (error) {
+            setServerError('NLP server is failed')
+        }
+        // setTimeout(() => {
+        //     const botReply: Message = { sender: 'bot', text: `"${input}"` };
+        //     onNewMessage(botReply);
+        // }, 5000);
     };
 
     return (

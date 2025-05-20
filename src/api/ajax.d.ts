@@ -31,3 +31,7 @@ export interface HistoryResponse {
     status: string;
     data: Mission[]
 }
+
+export interface NLP {
+    reply: string;
+}

@@ -1,6 +1,6 @@
 import axios from "axios"
 import service from './apiRequest'
-import { HistorySearch, HistoryMeGet, Mission, RobotMission } from "./ajax"
+import { HistorySearch, HistoryMeGet, Mission, RobotMission, NLP } from "./ajax"
 
 //const api = "http://localhost:8000/"
 export interface HistoryResponseList {
@@ -81,6 +81,23 @@ export const createMission = async (Path: string[]): Promise<Mission[] | string>
             `/dispatch/save`, { Path }
         )
         return res.data.data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error("error message", error.message);
+            return error.message;
+        } else {
+            console.error("unexpected error", error);
+            return "An expecte error has occured";
+        }
+    }
+};
+
+export const getPath = async (prompt: string): Promise<string> => {
+    try {
+        const res = await service.post<NLP>(
+            `/ollama/`, { prompt }
+        )
+        return res.data.reply;
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error("error message", error.message);

@@ -82,6 +82,32 @@ const Dispatch: React.FC<Props> = (_props: Props): JSX.Element => {
     }
 
     const convertPath = (input: string): string[] => {
+        try {
+            let fixedInput = input.slice(1, -1)
+            let positionList: string[] = []
+            const index = fixedInput.indexOf("{")
+            if (index !== -1) {
+                fixedInput = fixedInput.slice(index)
+            }
+            console.log("positionPath:", fixedInput)
+            const jsonObject = JSON.parse(fixedInput)
+            for (const key in jsonObject) {
+                if (jsonObject.hasOwnProperty(key)) {
+                    // const value = jsonObject[key]
+                    // const stringPath = JSON.stringify(value)
+                    positionList.push(`${key}`)
+                }
+            }
+            console.log("positionList:", positionList)
+            return positionList
+        } catch (error) {
+            console.error("Invailid input:", error)
+            return []
+        }
+    }
+
+    /*
+    const convertPath = (input: string): string[] => {
         let fixedInput = input
 
         if (input.startsWith('"') && input.endsWith('"')) {
@@ -98,7 +124,7 @@ const Dispatch: React.FC<Props> = (_props: Props): JSX.Element => {
             return []
         }
     }
-
+*/
     return (
         <div className='dispatch'>
             <div className='left'>

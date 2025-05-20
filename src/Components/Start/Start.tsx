@@ -14,7 +14,7 @@ const Start = (_props: Props) => {
                 <img src={Logo} alt="NYCU HomePage logo" />
             </div>
             <div>
-                <Title> Using dialog Service System for dispatch On Mobile Robot</Title>
+                <Title> Generative Conversation Dispatching System of Mobile Service Robot</Title>
             </div>
             <div>
                 <Button type="primary" variant='filled' shape='round' style={{ width: '250px', height: '100px', fontSize: '36px' }} icon={<MessageFilled style={{ color: 'ff7a45' }} />}>
